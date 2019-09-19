@@ -1,0 +1,21 @@
+html
+ body
+  h1= title
+   form(method='POST', action='/books/new')
+     | Title:
+     br
+     input(type='text', name='title')
+     br
+     | Author:
+     br
+     input(type='text', name='author')
+     br
+     | Genre:
+     br
+     input(type='text', name='genre')
+     br
+     | Year Published:
+     br
+     input(type='text', name='year')
+     br
+     input(type='submit', value='Submit')
