@@ -1,0 +1,33 @@
+{
+  "name": "sql-library-manager",
+  "version": "1.0.0",
+  "description": "A web application for listing, adding, updating, and deleting books in a library application, using JavaScript, Node.js, Express, Pug, and the SQL ORM Sequelize",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kemmerle/treehouse-unit-eight.git"
+  },
+  "keywords": [
+    "Node.js",
+    "Express",
+    "Pug",
+    "Sequelize"
+  ],
+  "author": "Allison Kemmerle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kemmerle/treehouse-unit-eight/issues"
+  },
+  "homepage": "https://github.com/kemmerle/treehouse-unit-eight#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "pug": "^2.0.4",
+    "sequelize": "^5.19.0",
+    "sqlite3": "^4.1.0"
+  }
+}
