@@ -19,3 +19,9 @@ html
      input(type='text', name='year')
      br
      input(type='submit', value='Submit')
+
+  if messages
+    h2 Please see the error messages below:
+      ul
+      each message in messages
+        li= message.message

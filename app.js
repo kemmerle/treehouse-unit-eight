@@ -29,9 +29,16 @@ app.get('/books/new', (req, res) => {
 });
 
 app.post('/books/new', async (req, res, next) => {
-  const request = req.body
-  const book = await Book.create(request);
-  res.redirect('/books/' + book.id);
+  try {
+    const request = req.body
+    const book = await Book.create(request);
+    res.redirect('/books/' + book.id)
+ } catch(error) {
+   if (error.name === 'SequelizeValidationError') {
+     const messages = error.errors.map(err => (err));
+     res.render('new-book', { messages });
+   }
+ }
 });
 
 app.get('/books/:id', async (req, res, next) => {
