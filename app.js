@@ -14,7 +14,7 @@ app.use('/static', express.static('public'));
 app.set('view engine', 'pug');
 
 app.get('/', (req, res) => {
-      res.redirect('/books');
+  res.redirect('/books');
 });
 
 app.get('/books', async (req, res, next) => {
@@ -59,8 +59,9 @@ app.post('/books/:id', async (req, res, next) => {
     res.redirect('/books/' + book.id)
  } catch(error) {
    if (error.name === 'SequelizeValidationError') {
+     const book = await Book.findByPk(req.params.id);
      const messages = error.errors.map(err => (err));
-     res.render('new-book', { messages });
+     res.render('update-book', { book, messages });
    }
  }
 });

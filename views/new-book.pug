@@ -1,6 +1,14 @@
-html
- body
-  h1= title
+extends layout.pug
+
+block content
+  h1 Create a New Book Entry
+  br
+  if messages
+    h2.error Please see the error messages below:
+      ul
+      each message in messages
+        li= message.message
+  br
   form(method='POST', action='/books/new')
     label(for='title') Title
     input#title(type='text', name='title')
@@ -16,9 +24,3 @@ html
     br
     br
     input(type='submit', value='Submit')
-
-  if messages
-    h2 Please see the error messages below:
-      ul
-      each message in messages
-        li= message.message

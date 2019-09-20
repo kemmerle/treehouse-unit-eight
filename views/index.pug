@@ -1,5 +1,8 @@
-html
- body
+extends layout.pug
+
+block content
+  a(href=`/books/new`) Create a New Book Entry
+  br
   each book in books
    ul
      li

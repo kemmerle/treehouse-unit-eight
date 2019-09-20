@@ -1,6 +1,13 @@
-html
- body
-  h1 Edit a Book
+extends layout.pug
+
+block content
+  h1 Edit This Book Entry
+  if messages
+    h2.error Please see the error messages below:
+      ul
+      each message in messages
+        li= message.message
+  br
   form(method='POST', action='/books/' + book.id)
     label(for='title') Title
     input#title(type='text', name='title', value='' + book.title)
@@ -17,14 +24,8 @@ html
     br
     input(type='submit', value='Edit this Book Entry')
 
-  if messages
-    h2 Please see the error messages below:
-      ul
-      each message in messages
-        li= message.message
-
   br
 
-  h1 Delete a Book
+  h1 Delete This Book Entry
   form(method='POST', action='/books/' + book.id + '/delete')
     input(type='submit', value='Delete this Book Entry')
