@@ -46,6 +46,31 @@ app.get('/books/:id', async (req, res, next) => {
   res.render('show', { book: book });
 });
 
+app.get('/books/edit/:id', async (req, res, next) => {
+  const book = await Book.findByPk(req.params.id);
+  res.render('update-book', { book: book });
+});
+
+app.post('/books/:id', async (req, res, next) => {
+  try {
+    const request = req.body
+    const book = await Book.findByPk(req.params.id);
+    await book.update(request);
+    res.redirect('/books/' + book.id)
+ } catch(error) {
+   if (error.name === 'SequelizeValidationError') {
+     const messages = error.errors.map(err => (err));
+     res.render('new-book', { messages });
+   }
+ }
+});
+
+app.post('/books/:id/delete', async (req, res) => {
+  const bookToDelete = await Book.findByPk(req.params.id);
+  await bookToDelete.destroy();
+  res.redirect('/books');
+});
+
 app.listen(3000, function() {
   db.sequelize.sync();
 });

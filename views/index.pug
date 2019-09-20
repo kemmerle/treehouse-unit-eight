@@ -2,4 +2,6 @@ html
  body
   each book in books
    ul
-    li #{book.title} -  #{book.author}
+     li
+       a(href=`/books/${book.id}`) #{book.title}
+       p #{book.author}

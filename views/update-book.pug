@@ -1,0 +1,30 @@
+html
+ body
+  h1 Edit a Book
+  form(method='POST', action='/books/' + book.id)
+    label(for='title') Title
+    input#title(type='text', name='title', value='' + book.title)
+    br
+    label(for='author') Author
+    input#author(type='text', name='author', value='' + book.author)
+    br
+    label(for='genre') Genre
+    input#genre(type='text', name='genre', value='' + book.genre)
+    br
+    label(for='year') Year
+    input#year(type='text', name='year', value='' + book.year)
+    br
+    br
+    input(type='submit', value='Edit this Book Entry')
+
+  if messages
+    h2 Please see the error messages below:
+      ul
+      each message in messages
+        li= message.message
+
+  br
+
+  h1 Delete a Book
+  form(method='POST', action='/books/' + book.id + '/delete')
+    input(type='submit', value='Delete this Book Entry')

@@ -4,3 +4,5 @@ html
    p #{book.author}
    p Genre: #{book.genre}
    p Year: #{book.year}
+
+   a(href=`/books/edit/${book.id}`) Edit or Delete This Book Entry
