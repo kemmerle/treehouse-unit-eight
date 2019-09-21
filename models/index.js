@@ -34,4 +34,6 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+sequelize.query("UPDATE SQLITE_SEQUENCE SET SEQ=0");
+
 module.exports = db;

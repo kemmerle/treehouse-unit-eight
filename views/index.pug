@@ -1,5 +1,21 @@
-html
- body
-  each book in books
-   ul
-    li #{book.title} -  #{book.author}
+extends layout.pug
+
+block content
+  h1 Library Books
+  a(href=`/books/new`) Create a New Book Entry
+  br
+  br
+  table
+      tbody
+        tr
+          th Title
+          th Author
+          th Genre
+          th Year
+      each book in books
+        tr
+          td
+             a(href=`/books/${book.id}`) #{book.title}
+          td #{book.author}
+          td #{book.genre}
+          td #{book.year}

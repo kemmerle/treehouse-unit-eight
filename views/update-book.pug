@@ -1,0 +1,34 @@
+extends layout.pug
+
+block content
+  h1 Edit This Book Entry
+  if errorMessages
+    h2.error Please see the error messages below:
+      ul
+      each message in errorMessages
+        li= message.message
+  br
+  form(method='POST', action='/books/' + book.id)
+    label(for='title') Title
+    input#title(type='text', name='title', value='' + book.title)
+    br
+    label(for='author') Author
+    input#author(type='text', name='author', value='' + book.author)
+    br
+    label(for='genre') Genre
+    input#genre(type='text', name='genre', value='' + book.genre)
+    br
+    label(for='year') Year
+    input#year(type='text', name='year', value='' + book.year)
+    br
+    br
+    input(type='submit', value='Edit this Book Entry')
+
+  br
+  h1
+   a(href=`/books`) Cancel
+  br
+
+  h1 Delete This Book Entry
+  form(method='POST', action='/books/' + book.id + '/delete')
+    input(type='submit', value='Delete this Book Entry')
