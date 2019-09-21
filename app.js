@@ -18,9 +18,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/books', async (req, res, next) => {
-  const books = await Book.findAll();
-  const bookList = books.map(book => book.toJSON());
-
+  const bookList = await Book.findAll({
+    order: [
+      ['title', 'ASC']
+    ]
+  });
   res.render('index', { books: bookList });
 });
 
@@ -35,20 +37,19 @@ app.post('/books/new', async (req, res, next) => {
     res.redirect('/books/' + book.id)
  } catch(error) {
    if (error.name === 'SequelizeValidationError') {
-     const messages = error.errors.map(err => (err));
-     res.render('new-book', { messages });
+     const errorMessages = error.errors.map(error => (error));
+     res.render('new-book', { errorMessages });
    }
  }
 });
 
 app.get('/books/:id', async (req, res, next) => {
   const book = await Book.findByPk(req.params.id);
-  res.render('show', { book: book });
-});
-
-app.get('/books/edit/:id', async (req, res, next) => {
-  const book = await Book.findByPk(req.params.id);
-  res.render('update-book', { book: book });
+  if (book === null) {
+    res.render('error')
+  } else {
+    res.render('update-book', { book: book });
+  }
 });
 
 app.post('/books/:id', async (req, res, next) => {
@@ -60,8 +61,8 @@ app.post('/books/:id', async (req, res, next) => {
  } catch(error) {
    if (error.name === 'SequelizeValidationError') {
      const book = await Book.findByPk(req.params.id);
-     const messages = error.errors.map(err => (err));
-     res.render('update-book', { book, messages });
+     const errorMessages = error.errors.map(error => (error));
+     res.render('update-book', { book, errorMessages });
    }
  }
 });
@@ -70,6 +71,18 @@ app.post('/books/:id/delete', async (req, res) => {
   const bookToDelete = await Book.findByPk(req.params.id);
   await bookToDelete.destroy();
   res.redirect('/books');
+});
+
+app.use((req, res, next) => {
+  const err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+app.use((err, req, res, next) => {
+  res.locals.error = err;
+  console.log(err)
+  res.render('page-not-found');
 });
 
 app.listen(3000, function() {

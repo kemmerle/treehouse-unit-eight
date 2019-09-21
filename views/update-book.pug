@@ -2,10 +2,10 @@ extends layout.pug
 
 block content
   h1 Edit This Book Entry
-  if messages
+  if errorMessages
     h2.error Please see the error messages below:
       ul
-      each message in messages
+      each message in errorMessages
         li= message.message
   br
   form(method='POST', action='/books/' + book.id)
@@ -24,6 +24,9 @@ block content
     br
     input(type='submit', value='Edit this Book Entry')
 
+  br
+  h1
+   a(href=`/books`) Cancel
   br
 
   h1 Delete This Book Entry
