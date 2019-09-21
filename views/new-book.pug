@@ -3,10 +3,10 @@ extends layout.pug
 block content
   h1 Create a New Book Entry
   br
-  if messages
+  if errorMessages
     h2.error Please see the error messages below:
       ul
-      each message in messages
+      each message in errorMessages
         li= message.message
   br
   form(method='POST', action='/books/new')
