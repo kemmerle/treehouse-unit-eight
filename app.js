@@ -44,7 +44,7 @@ app.get('/', (req, res) => {
 });
 
 //Here I use an async function, so that I can retrieve all books from my database
-//using a Sequelize command. On my index page, I need to display all books in
+//using a Sequelize operator. On my index page, I need to display all books in
 //ascending order by title, so I've used the order object to ensure that the books
 //are retrieved in the correct order.
 //In my res.render functon, I specify that the index.pug template should be
@@ -88,7 +88,7 @@ app.post('/books/new', async (req, res, next) => {
 });
 
 //In my '/books/:id' route, first I retrieve the book by its ID with the Sequelize
-//findbyPk() (find by primary key) method. If the book is equal to null (ie. the
+//findbyPk() (find by primary key) operation. If the book is equal to null (ie. the
 //primary key does not exist), I render the 'error' pug template. If the book
 //is not null and is in the database, I render the 'update-book' pug template
 //and hand it down the book variable.
@@ -116,7 +116,8 @@ app.post('/books/:id', async (req, res, next) => {
     res.redirect('/books/' + book.id)
  } catch(error) {
    if (error.name === 'SequelizeValidationError') {
-     const book = await Book.findByPk(req.params.id);
+     const request = req.body
+     const book = await Book.build(request);
      const errorMessages = error.errors.map(error => (error));
      res.render('update-book', { book, errorMessages });
    }
@@ -126,7 +127,7 @@ app.post('/books/:id', async (req, res, next) => {
 //In my '/books/:id/delete' route, I can simply find the book to be deleted by
 //its primary key taken from the url through req.params.id. Then I can delete
 //it from the database with the Sequelize destroy() operation. Finally, I redirect
-//the user to the '/books' route. 
+//the user to the '/books' route.
 app.post('/books/:id/delete', async (req, res) => {
   const bookToDelete = await Book.findByPk(req.params.id);
   await bookToDelete.destroy();
