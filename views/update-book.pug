@@ -2,12 +2,23 @@ extends layout.pug
 
 block content
   h1 Edit This Book Entry
+  //-
+   Above my form, I use the pug conditional method. If the errorMessages
+   variable has been handed down to the template, then I iterate over the
+   errorMessages and display each of them in an li element.
   if errorMessages
     h2.error Please see the error messages below:
       ul
       each message in errorMessages
         li= message.message
   br
+  //-
+   -In my form, I use string interpolation to ensure the form's action is directed
+   to the correct route.
+   -Then I ensure that the labels link their input fields by matching them to
+   the input field's id.
+   -I also ensure that every input field should have a value by automatically
+   generating the field's values with the book's attributes.
   form(method='POST', action='/books/' + book.id)
     label(for='title') Title
     input#title(type='text', name='title', value='' + book.title)
@@ -25,9 +36,15 @@ block content
     input(type='submit', value='Edit this Book Entry')
 
   br
+  //-
+   Here I include a link back to the Home Page in case the user does not want
+   to edit the book.
   h1
    a(href=`/books`) Cancel
   br
+  //-
+   Here I include another form, so that a user can delete a book entry from the
+   library database. This form needs no input fields, only a submit button. 
 
   h1 Delete This Book Entry
   form(method='POST', action='/books/' + book.id + '/delete')

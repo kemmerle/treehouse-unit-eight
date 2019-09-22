@@ -3,12 +3,21 @@ extends layout.pug
 block content
   h1 Create a New Book Entry
   br
+  //-
+   Above my form, I use the pug conditional method. If the errorMessages
+   variable has been handed down to the template, then I iterate over the
+   errorMessages and display each of them in an li element.
   if errorMessages
     h2.error Please see the error messages below:
       ul
       each message in errorMessages
         li= message.message
   br
+  //-
+   -In my form, I use specify form's action is directed to the '/books/new' route
+   in my Express app.
+   -Then I ensure that the labels link their input fields by matching them to
+   the input field's id.
   form(method='POST', action='/books/new')
     label(for='title') Title
     input#title(type='text', name='title')

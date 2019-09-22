@@ -1,4 +1,6 @@
 'use strict';
+//I used Sequelize CLI to set up my Sequelize models and migrations, and so this
+//file has been auto-generated. 
 
 const fs = require('fs');
 const path = require('path');
