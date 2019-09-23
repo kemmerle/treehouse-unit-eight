@@ -116,8 +116,7 @@ app.post('/books/:id', async (req, res, next) => {
     res.redirect('/books/' + book.id)
  } catch(error) {
    if (error.name === 'SequelizeValidationError') {
-     const request = req.body
-     const book = await Book.build(request);
+     const book = await Book.findByPk(req.params.id);
      const errorMessages = error.errors.map(error => (error));
      res.render('update-book', { book, errorMessages });
    }

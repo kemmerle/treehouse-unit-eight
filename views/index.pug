@@ -5,7 +5,7 @@ block content
   //-
    Here I include a link, so a user can easily create a new book entry in the
    library database.
-  a(href=`/books/new`) Create a New Book Entry
+  a(href=`/books/new`).index-button Create New Book
   br
   br
   //-
@@ -13,7 +13,7 @@ block content
    -First, I use the <tr> tag to create the Table Headers: Title, Author.
    Genre, and Year.
    -Second, with the <td> tag, I populate the table with my library books using
-   the pug template's each method to iterate over my individual book entries. 
+   the pug template's each method to iterate over my individual book entries.
   table
       tbody
         tr
