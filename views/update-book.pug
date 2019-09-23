@@ -33,19 +33,19 @@ block content
     input#year(type='text', name='year', value='' + book.year)
     br
     br
-    input(type='submit', value='Edit this Book Entry')
+    input(type='submit', value='Update Book')
 
   br
   //-
    Here I include a link back to the Home Page in case the user does not want
    to edit the book.
-  h1
-   a(href=`/books`) Cancel
+  br
+  a(href=`/books`).button Cancel
+  br
+  br
   br
   //-
    Here I include another form, so that a user can delete a book entry from the
-   library database. This form needs no input fields, only a submit button. 
-
-  h1 Delete This Book Entry
+   library database. This form needs no input fields, only a submit button.
   form(method='POST', action='/books/' + book.id + '/delete')
-    input(type='submit', value='Delete this Book Entry')
+    input(type='submit', value='Delete Book')

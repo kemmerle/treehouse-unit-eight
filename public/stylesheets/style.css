@@ -1,4 +1,4 @@
- /* CSS styles provided by Team Treehouse */ 
+ /* CSS styles provided by Team Treehouse */
 
 body {
   padding: 10px 50px 50px;
@@ -17,6 +17,21 @@ a {
   }
 
 a.button, input[type=submit] {
+  color: white;
+  background: #019875;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 10px 14px 12px;
+  font-size: 14px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+a.button {
+  margin-left: 140px;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a.index-button {
   color: white;
   background: #019875;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
